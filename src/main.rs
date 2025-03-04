@@ -1,4 +1,4 @@
-use rodeostat::Rodeostat;
+use rodeostat_rs::Rodeostat;
 
 fn main() {
 
