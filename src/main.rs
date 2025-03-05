@@ -26,7 +26,8 @@ fn main() {
         let v = 0.5*(i as f32)/(num as f32);
         let v = dev.set_volt(v).expect("error getting voltage");
         let i = dev.get_curr().expect("error reading current");
-        println!("v = {v}, i = {i}");
+        let v_ref = dev.get_ref_volt().expect("error reading reference voltage");
+        println!("v = {v:0.3}, i = {i:0.3}, v_ref = {v_ref:0.3}");
     }
 
     let connected = dev.set_all_elect_connected(false)

@@ -39,24 +39,6 @@ impl Rodeostat {
         Ok(rsp_struct.response.version)
     }
 
-    pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
-        let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
-            command: constant::SET_ALL_ELECT_CONNECTED_STR,
-            connected: value, 
-        })?;
-        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
-        let rsp_struct: rsp::SetAllElectConn = serde_json::from_str(&rsp_string)?;
-        Ok(rsp_struct.response.connected)
-    }
-
-    pub fn get_all_elect_connected(&mut self) -> anyhow::Result<bool> {
-        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
-            command: constant::GET_ALL_ELECT_CONNECTED_STR,
-        })?;
-        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
-        let rsp_struct: rsp::GetAllElectConn = serde_json::from_str(&rsp_string)?;
-        Ok(rsp_struct.response.connected)
-    }
 
     pub fn get_test_names(&mut self) -> anyhow::Result<Vec<String>> {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
@@ -93,6 +75,34 @@ impl Rodeostat {
         let rsp_string = self.write_json_read_rsp(&cmd_json)?;
         let rsp_struct: rsp::GetCurr = serde_json::from_str(&rsp_string)?;
         Ok(rsp_struct.response.i)
+    }
+
+    pub fn get_ref_volt(&mut self) -> anyhow::Result<f32> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_REF_VOLT_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetRefVolt = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.r)
+    }
+
+    pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
+        let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
+            command: constant::SET_ALL_ELECT_CONNECTED_STR,
+            connected: value, 
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::SetAllElectConn = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.connected)
+    }
+
+    pub fn get_all_elect_connected(&mut self) -> anyhow::Result<bool> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_ALL_ELECT_CONNECTED_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetAllElectConn = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.connected)
     }
 
 

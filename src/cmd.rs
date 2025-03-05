@@ -12,7 +12,6 @@ pub struct SetVolt<'a> {
     pub v: f32,
 }
 
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetAllElectConn<'a> {
     pub command: &'a str,

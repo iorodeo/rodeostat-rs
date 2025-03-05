@@ -79,6 +79,19 @@ pub struct GetCurr {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct GetRefVoltPrm {
+    pub command: String,
+    pub r: f32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetRefVolt {
+    pub success: bool,
+    pub response: GetRefVoltPrm,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionPrm {
     pub command: String,
     pub version: String,
