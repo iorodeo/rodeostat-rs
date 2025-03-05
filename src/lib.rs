@@ -21,13 +21,41 @@ impl Rodeostat {
         Ok(Rodeostat { port })
     }
 
-    pub fn get_variant(&mut self) -> anyhow::Result<String> {
+    pub fn get_hardware_variant(&mut self) -> anyhow::Result<String> {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_VARIANT_STR,
         })?;
         let rsp_string = self.write_json_read_rsp(&cmd_json)?;
         let rsp_struct: rsp::GetVariant = serde_json::from_str(&rsp_string)?;
         Ok(rsp_struct.response.variant)
+    }
+
+    pub fn get_firmware_version(&mut self) -> anyhow::Result<String> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_VERSION_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetVersion = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.version)
+    }
+
+    pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
+        let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
+            command: constant::SET_ALL_ELECT_CONNECTED_STR,
+            connected: value, 
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::SetAllElectConn = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.connected)
+    }
+
+    pub fn get_all_elect_connected(&mut self) -> anyhow::Result<bool> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_ALL_ELECT_CONNECTED_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetAllElectConn = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.connected)
     }
 
     pub fn get_test_names(&mut self) -> anyhow::Result<Vec<String>> {
@@ -67,14 +95,8 @@ impl Rodeostat {
         Ok(rsp_struct.response.i)
     }
 
-    pub fn get_version(&mut self) -> anyhow::Result<String> {
-        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
-            command: constant::GET_VERSION_STR,
-        })?;
-        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
-        let rsp_struct: rsp::GetVersion = serde_json::from_str(&rsp_string)?;
-        Ok(rsp_struct.response.version)
-    }
+
+    // ----------------------------------------------------------------------------
 
     pub fn write_json(&mut self, cmd_json: &JsonValue) -> anyhow::Result<()> {
         let mut cmd_bytes = serde_json::to_vec(&cmd_json)?;

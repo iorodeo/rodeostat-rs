@@ -12,11 +12,10 @@ pub struct SetVolt<'a> {
     pub v: f32,
 }
 
-//pub const GET_TEST_NAMES: NoArgCmd = NoArgCmd {
-//    command: constant::GET_TEST_NAMES_STR,
-//};
-//
-//
-//pub const GET_VERSION: NoArgCmd = NoArgCmd {
-//    command: constant::GET_VERSION_STR,
-//};
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetAllElectConn<'a> {
+    pub command: &'a str,
+    pub connected: bool,
+}
+

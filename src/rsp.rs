@@ -13,6 +13,19 @@ pub struct ErrorMsg {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct GetVariantPrm {
+    pub command: String,
+    pub variant: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetVariant {
+    pub success: bool,
+    pub response: GetVariantPrm,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTestNamesPrm {
     pub command: String,
@@ -66,19 +79,6 @@ pub struct GetCurr {
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariantPrm {
-    pub command: String,
-    pub variant: String,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariant {
-    pub success: bool,
-    pub response: GetVariantPrm,
-}
-
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionPrm {
     pub command: String,
     pub version: String,
@@ -89,4 +89,32 @@ pub struct GetVersion {
     pub success: bool,
     pub response: GetVersionPrm,
 }
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetAllElectConnPrm {
+    pub command: String, 
+    pub connected: bool,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetAllElectConn {
+    success: bool, 
+    pub response: SetAllElectConnPrm,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetAllElectConnPrm {
+    pub command: String, 
+    pub connected: bool,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetAllElectConn {
+    success: bool, 
+    pub response: GetAllElectConnPrm,
+}
+
+
 
