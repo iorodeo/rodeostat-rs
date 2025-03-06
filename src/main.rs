@@ -41,5 +41,13 @@ fn main() {
     let test_names = dev.get_test_names().expect("error gettting test names");
     println!("test_names: {test_names:?}");
 
-    let _tmp = dev.get_param("constant");
+    let param = dev.get_cyclic_param().expect("error unable to get cyclic test param");
+    println!("{param:?}");
+
+    let param = dev.get_sinusoid_param().expect("error unable to get sinusoid test param");
+    println!("{param:?}");
+
+    let param = dev.get_constant_param().expect("error unable to get constant test param"); 
+    println!("{param:?}");
+
 }

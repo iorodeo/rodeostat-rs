@@ -5,7 +5,6 @@ pub struct Success {
     pub success: bool,
 }
 
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ErrorMsg {
     pub message: String,
@@ -13,7 +12,7 @@ pub struct ErrorMsg {
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariantPrm {
+pub struct GetVariantRsp {
     pub command: String,
     pub variant: String,
 }
@@ -21,13 +20,13 @@ pub struct GetVariantPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVariant {
     pub success: bool,
-    pub response: GetVariantPrm,
+    pub response: GetVariantRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetTestNamesPrm {
+pub struct GetTestNamesRsp {
     pub command: String,
     pub test_names: Vec<String>,
 }
@@ -35,12 +34,12 @@ pub struct GetTestNamesPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetTestNames {
     pub success: bool,
-    pub response: GetTestNamesPrm,
+    pub response: GetTestNamesRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVoltPrm {
+pub struct GetVoltRsp {
     pub command: String,
     pub v: f32,
 }
@@ -48,12 +47,12 @@ pub struct GetVoltPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVolt {
     pub success: bool,
-    pub response: GetVoltPrm,
+    pub response: GetVoltRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SetVoltPrm {
+pub struct SetVoltRsp {
     pub command: String, 
     pub v: f32,
 }
@@ -61,13 +60,13 @@ pub struct SetVoltPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetVolt {
     pub success: bool, 
-    pub response: SetVoltPrm,
+    pub response: SetVoltRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetCurrPrm {
+pub struct GetCurrRsp {
     pub command: String, 
     pub i: f32,
 }
@@ -75,12 +74,12 @@ pub struct GetCurrPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetCurr {
     pub success: bool, 
-    pub response: GetCurrPrm,
+    pub response: GetCurrRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetRefVoltPrm {
+pub struct GetRefVoltRsp {
     pub command: String,
     pub r: f32,
 }
@@ -88,24 +87,54 @@ pub struct GetRefVoltPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetRefVolt {
     pub success: bool,
-    pub response: GetRefVoltPrm,
+    pub response: GetRefVoltRsp,
 }
 
+
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetParamPrm {
+pub struct GetCyclicParamRsp {
     pub command: String,
     pub test: String,
+    pub param: crate::param::CyclicParam,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetParam {
+pub struct GetCyclicParam {
     pub success: bool, 
-    pub response: GetParamPrm,
+    pub response: GetCyclicParamRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVersionPrm {
+pub struct GetSinusoidParamRsp {
+    pub command: String,
+    pub test: String,
+    pub param: crate::param::SinusoidParam,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetSinusoidParam {
+    pub success: bool, 
+    pub response: GetSinusoidParamRsp,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetConstantParamRsp {
+    pub command: String,
+    pub test: String,
+    pub param: crate::param::ConstantParam,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetConstantParam {
+    pub success: bool, 
+    pub response: GetConstantParamRsp,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetVersionRsp {
     pub command: String,
     pub version: String,
 }
@@ -113,12 +142,12 @@ pub struct GetVersionPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersion {
     pub success: bool,
-    pub response: GetVersionPrm,
+    pub response: GetVersionRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SetAllElectConnPrm {
+pub struct SetAllElectConnRsp {
     pub command: String, 
     pub connected: bool,
 }
@@ -126,12 +155,12 @@ pub struct SetAllElectConnPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetAllElectConn {
     success: bool, 
-    pub response: SetAllElectConnPrm,
+    pub response: SetAllElectConnRsp,
 }
 
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetAllElectConnPrm {
+pub struct GetAllElectConnRsp {
     pub command: String, 
     pub connected: bool,
 }
@@ -139,7 +168,7 @@ pub struct GetAllElectConnPrm {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetAllElectConn {
     success: bool, 
-    pub response: GetAllElectConnPrm,
+    pub response: GetAllElectConnRsp,
 }
 
 

@@ -3,13 +3,13 @@ pub const SERIAL_BAUDRATE: u32 = 115_200;
 pub const SERIAL_TIMEOUT: u64 = 500;
 
 // Voltammetric test names
-pub const CYCLIC_TEST: &str = "cyclic";
-pub const SINUSOID_TEST: &str = "sinusoid";
-pub const CONSTANT_TEST: &str = "constant";
-pub const SQUAREWAVE_TEST: &str = "squareWave"; 
-pub const LINEAR_SWEEP_TEST: &str = "linearSweep"; 
-pub const CHRONOAMP_TEST: &str = "chronoamp"; 
-pub const MULTISTEP_TEST: &str = "multiStep";
+pub const CYCLIC_TEST_STR: &str = "cyclic";
+pub const SINUSOID_TEST_STR: &str = "sinusoid";
+pub const CONSTANT_TEST_STR: &str = "constant";
+pub const SQUAREWAVE_TEST_STR: &str = "squareWave"; 
+pub const LINEAR_SWEEP_TEST_STR: &str = "linearSweep"; 
+pub const CHRONOAMP_TEST_STR: &str = "chronoamp"; 
+pub const MULTISTEP_TEST_STR: &str = "multiStep";
 
 
 // Serial command strings
