@@ -66,6 +66,7 @@ pub struct SetVolt {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct GetCurrPrm {
     pub command: String, 
     pub i: f32,
@@ -88,6 +89,18 @@ pub struct GetRefVoltPrm {
 pub struct GetRefVolt {
     pub success: bool,
     pub response: GetRefVoltPrm,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetParamPrm {
+    pub command: String,
+    pub test: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetParam {
+    pub success: bool, 
+    pub response: GetParamPrm,
 }
 
 

@@ -1,13 +1,25 @@
+// Serial communications parameters
 pub const SERIAL_BAUDRATE: u32 = 115_200;
 pub const SERIAL_TIMEOUT: u64 = 500;
 
+// Voltammetric test names
+pub const CYCLIC_TEST: &str = "cyclic";
+pub const SINUSOID_TEST: &str = "sinusoid";
+pub const CONSTANT_TEST: &str = "constant";
+pub const SQUAREWAVE_TEST: &str = "squareWave"; 
+pub const LINEAR_SWEEP_TEST: &str = "linearSweep"; 
+pub const CHRONOAMP_TEST: &str = "chronoamp"; 
+pub const MULTISTEP_TEST: &str = "multiStep";
+
+
+// Serial command strings
 //pub const RUN_TEST_STR: &str = "runTest";
 //pub const STOP_TEST_STR: &str = "stopTest";
 pub const GET_VOLT_STR: &str = "getVolt";
 pub const SET_VOLT_STR: &str = "setVolt";
 pub const GET_CURR_STR: &str = "getCurr";
 pub const GET_REF_VOLT_STR: &str = "getRefVolt";
-//pub const GET_PARAM_STR: &str = "getParam";
+pub const GET_PARAM_STR: &str = "getParam";
 //pub const SET_PARAM_STR: &str = "setParam";
 //pub const GET_VOLT_RANGE_STR: &str = "getVoltRange";
 //pub const SET_VOLT_RANGE_STR: &str = "setVoltRange";

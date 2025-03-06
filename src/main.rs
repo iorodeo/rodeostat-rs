@@ -40,4 +40,6 @@ fn main() {
 
     let test_names = dev.get_test_names().expect("error gettting test names");
     println!("test_names: {test_names:?}");
+
+    let _tmp = dev.get_param("constant");
 }

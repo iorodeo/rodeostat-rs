@@ -18,3 +18,9 @@ pub struct SetAllElectConn<'a> {
     pub connected: bool,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetParam<'a> {
+    pub command: &'a str,
+    pub test: &'a str, 
+}
+

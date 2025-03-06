@@ -86,6 +86,27 @@ impl Rodeostat {
         Ok(rsp_struct.response.r)
     }
 
+    pub fn get_param(&mut self, test_name: &str) -> anyhow::Result<()> {
+        let cmd_json = serde_json::to_value(&cmd::GetParam {
+            command: constant::GET_PARAM_STR,
+            test: test_name,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetParam = serde_json::from_str(&rsp_string)?;
+        match &rsp_struct.response.test[..] {
+            constant::CYCLIC_TEST => println!("cyclic"),
+            constant::SINUSOID_TEST => println!("sinusoid"),
+            constant::CONSTANT_TEST => println!("constant"),
+            constant::SQUAREWAVE_TEST => println!("squarewave"),
+            constant::LINEAR_SWEEP_TEST => println!("linear_sweep"),
+            constant::CHRONOAMP_TEST => println!("chronoamp"),
+            constant::MULTISTEP_TEST => println!("multistep"),
+            _ => println!("unknown"),
+        }
+        println!("rsp_string: {rsp_string}");
+        Ok(())
+    }
+
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,
