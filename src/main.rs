@@ -1,4 +1,13 @@
 use rodeostat_rs::Rodeostat;
+use rodeostat_rs::param::{
+    ChronoampParam, 
+    ConstantParam, 
+    CyclicParam, 
+    LinearSweepParam, 
+    MultistepParam, 
+    SinusoidParam,
+    SquareWaveParam,
+};
 
 fn main() {
 
@@ -46,28 +55,38 @@ fn main() {
         .expect("error gettting test names");
     println!("test_names: {test_names:?}");
 
-    let param = dev.get_cyclic_param()
+    let p: CyclicParam = dev.get_param()
         .expect("error unable to get cyclic test param");
-    println!("{param:?}");
+    println!("{p:?}");
 
-    let param = dev.get_sinusoid_param()
+    let p: SinusoidParam = dev.get_param()
         .expect("error unable to get sinusoid test param");
-    println!("{param:?}");
+    println!("{p:?}");
 
-    let param = dev.get_constant_param()
+    let p: ConstantParam = dev.get_param()
         .expect("error unable to get constant test param"); 
-    println!("{param:?}");
+    println!("{p:?}");
 
-    let param = dev.get_square_wave_param()
+    let p: SquareWaveParam = dev.get_param()
         .expect("error unable to get square wave test param"); 
-    println!("{param:?}");
+    println!("{p:?}");
 
-    let param = dev.get_linear_sweep_param()
+    let p: LinearSweepParam = dev.get_param()
         .expect("error unable to get square wave test param"); 
-    println!("{param:?}");
+    println!("{p:?}");
 
-    let param = dev.get_chronoamp_param()
+    let p: ChronoampParam = dev.get_param()
         .expect("error unable to get square wave test param"); 
-    println!("{param:?}");
+    println!("{p:?}");
+
+    let p: SquareWaveParam  = dev.get_param()
+        .expect("error unable to get square wave test param"); 
+    println!("{p:?}");
+
+    let p: MultistepParam  = dev.get_param()
+        .expect("error unable to get multistep test param"); 
+    println!("{p:?}");
+
+
 
 }
