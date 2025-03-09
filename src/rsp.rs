@@ -134,6 +134,33 @@ pub struct GetConstantParam {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct GetSquareWaveParamRsp {
+    pub command: String,
+    pub test: String,
+    pub param: crate::param::SquareWaveParam,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetLinearSweepParam {
+    pub success: bool, 
+    pub response: GetLinearSweepParamRsp,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetLinearSweepParamRsp {
+    pub command: String,
+    pub test: String,
+    pub param: crate::param::LinearSweepParam,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetSquareWaveParam {
+    pub success: bool, 
+    pub response: GetSquareWaveParamRsp,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionRsp {
     pub command: String,
     pub version: String,

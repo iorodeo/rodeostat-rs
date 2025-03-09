@@ -117,6 +117,31 @@ impl Rodeostat {
         Ok(rsp_struct.response.param)
     }
 
+    pub fn get_square_wave_param(&mut self) -> anyhow::Result<param::SquareWaveParam> {
+        let cmd_json = serde_json::to_value(&cmd::GetParam {
+            command: constant::GET_PARAM_STR, 
+            test: constant::SQUARE_WAVE_TEST_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetSquareWaveParam = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.param)
+    }
+
+    pub fn get_linear_sweep_param(&mut self) -> anyhow::Result<param::LinearSweepParam> {
+        let cmd_json = serde_json::to_value(&cmd::GetParam {
+            command: constant::GET_PARAM_STR, 
+            test: constant::LINEAR_SWEEP_TEST_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetLinearSweepParam = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.param)
+    }
+
+    //pub fn get_chronoamp_param(&mut self) -> anyhow::Result(<param::ChronoampParam> {
+    //    let cmd_json = serde_json::to_value
+    //}
+
+
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,

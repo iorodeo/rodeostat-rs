@@ -2,14 +2,18 @@ use rodeostat_rs::Rodeostat;
 
 fn main() {
 
-    let mut dev = Rodeostat::new("/dev/ttyACM0").expect("unable to open port");
+    let mut dev = Rodeostat::new("/dev/ttyACM0")
+        .expect("unable to open port");
 
     println!("dev: {dev:?}");
     println!();
 
-    let variant = dev.get_hardware_variant().expect("error getting variant");
+    let variant = dev.get_hardware_variant()
+        .expect("error getting variant");
     println!("variant = {variant}");
-    let version = dev.get_firmware_version().expect("error getting version");
+
+    let version = dev.get_firmware_version()
+        .expect("error getting version");
     println!("version = {version}");
 
     let num = 10;
@@ -38,16 +42,28 @@ fn main() {
         .expect("unable to get connection status");
     println!("connected = {connected}");
 
-    let test_names = dev.get_test_names().expect("error gettting test names");
+    let test_names = dev.get_test_names()
+        .expect("error gettting test names");
     println!("test_names: {test_names:?}");
 
-    let param = dev.get_cyclic_param().expect("error unable to get cyclic test param");
+    let param = dev.get_cyclic_param()
+        .expect("error unable to get cyclic test param");
     println!("{param:?}");
 
-    let param = dev.get_sinusoid_param().expect("error unable to get sinusoid test param");
+    let param = dev.get_sinusoid_param()
+        .expect("error unable to get sinusoid test param");
     println!("{param:?}");
 
-    let param = dev.get_constant_param().expect("error unable to get constant test param"); 
+    let param = dev.get_constant_param()
+        .expect("error unable to get constant test param"); 
+    println!("{param:?}");
+
+    let param = dev.get_square_wave_param()
+        .expect("error unable to get square wave test param"); 
+    println!("{param:?}");
+
+    let param = dev.get_linear_sweep_param()
+        .expect("error unable to get square wave test param"); 
     println!("{param:?}");
 
 }
