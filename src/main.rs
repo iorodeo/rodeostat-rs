@@ -66,4 +66,8 @@ fn main() {
         .expect("error unable to get square wave test param"); 
     println!("{param:?}");
 
+    let param = dev.get_chronoamp_param()
+        .expect("error unable to get square wave test param"); 
+    println!("{param:?}");
+
 }

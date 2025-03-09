@@ -57,7 +57,7 @@ pub struct LinearSweepParam {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct Chronoamp {
+pub struct ChronoampParam {
     pub quiet_value: f32, 
     pub quiet_time: f32, 
     pub step: [(u32, f32); 2],

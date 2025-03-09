@@ -141,6 +141,13 @@ pub struct GetSquareWaveParamRsp {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+pub struct GetSquareWaveParam {
+    pub success: bool, 
+    pub response: GetSquareWaveParamRsp,
+}
+
+
+#[derive(Serialize, Deserialize, Debug)]
 pub struct GetLinearSweepParam {
     pub success: bool, 
     pub response: GetLinearSweepParamRsp,
@@ -154,11 +161,21 @@ pub struct GetLinearSweepParamRsp {
     pub param: crate::param::LinearSweepParam,
 }
 
+
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetSquareWaveParam {
+pub struct GetChronoampParam {
     pub success: bool, 
-    pub response: GetSquareWaveParamRsp,
+    pub response: GetChronoampParamRsp,
 }
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetChronoampParamRsp {
+    pub command: String,
+    pub test: String,
+    pub param: crate::param::ChronoampParam,
+}
+
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionRsp {

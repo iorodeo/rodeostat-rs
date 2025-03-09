@@ -137,10 +137,15 @@ impl Rodeostat {
         Ok(rsp_struct.response.param)
     }
 
-    //pub fn get_chronoamp_param(&mut self) -> anyhow::Result(<param::ChronoampParam> {
-    //    let cmd_json = serde_json::to_value
-    //}
-
+    pub fn get_chronoamp_param(&mut self) -> anyhow::Result<param::ChronoampParam> {
+        let cmd_json = serde_json::to_value(&cmd::GetParam {
+            command: constant::GET_PARAM_STR,
+            test: constant::CHRONOAMP_TEST_STR,
+        })?;
+        let rsp_string = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: rsp::GetChronoampParam = serde_json::from_str(&rsp_string)?;
+        Ok(rsp_struct.response.param)
+    }
 
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
