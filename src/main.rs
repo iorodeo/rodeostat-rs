@@ -87,6 +87,18 @@ fn main() {
         .expect("error unable to get multistep test param"); 
     println!("{p:?}");
 
+    let p: ConstantParam = dev.get_param()
+        .expect("error unable to get constant test param"); 
+    println!("{p:?}");
 
+    let p : ConstantParam = ConstantParam {
+        quiet_value: 0.5, 
+        quiet_time: 100,
+        value: -3.0, 
+        duration: 2000,
+    };
+    let q = dev.set_param(p)
+        .expect("error unable to set parameters");
+    println!("{q:?}");
 
 }

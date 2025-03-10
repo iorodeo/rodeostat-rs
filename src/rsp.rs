@@ -85,97 +85,6 @@ pub struct GetRefVolt {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetCyclicParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::CyclicParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetCyclicParam {
-    pub success: bool,
-    pub response: GetCyclicParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetSinusoidParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::SinusoidParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetSinusoidParam {
-    pub success: bool,
-    pub response: GetSinusoidParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetConstantParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::ConstantParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetConstantParam {
-    pub success: bool,
-    pub response: GetConstantParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetSquareWaveParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::SquareWaveParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetSquareWaveParam {
-    pub success: bool,
-    pub response: GetSquareWaveParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetLinearSweepParam {
-    pub success: bool,
-    pub response: GetLinearSweepParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetLinearSweepParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::LinearSweepParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetChronoampParam {
-    pub success: bool,
-    pub response: GetChronoampParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetChronoampParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::ChronoampParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetMultistepParam {
-    pub success: bool,
-    pub response: GetMultistepParamRsp,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetMultistepParamRsp {
-    pub command: String,
-    pub test: String,
-    pub param: crate::param::MultistepParam,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct GetParam<T> {
     pub command: String,
     pub test: String,
@@ -186,6 +95,19 @@ pub struct GetParam<T> {
 pub struct GetParamRsp<T> {
     pub success: bool,
     pub response: GetParam<T>,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetParam<T> {
+    pub command: String,
+    pub test: String,
+    pub param: T,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetParamRsp<T> {
+    pub success: bool,
+    pub response: SetParam<T>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

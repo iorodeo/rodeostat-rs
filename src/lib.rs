@@ -1,15 +1,14 @@
 mod cmd;
 mod constant;
-mod rsp;
 pub mod param;
+mod rsp;
 
 use anyhow::anyhow;
-use serde::de;
+use serde::{de, ser};
 use serde_json::Value as JsonValue;
 use serialport::SerialPort;
 use std::io::{BufRead, BufReader};
 use std::time::Duration;
-
 
 #[derive(Debug)]
 pub struct Rodeostat {
@@ -81,12 +80,28 @@ impl Rodeostat {
         Ok(rsp_struct.response.r)
     }
 
-    pub fn get_param<T: param::TestParam + de::DeserializeOwned>(&mut self) -> anyhow::Result<T> {
+    pub fn get_param<T>(&mut self) -> anyhow::Result<T>
+    where
+        T: param::TestParam + de::DeserializeOwned,
+    {
         let cmd_json = serde_json::to_value(&cmd::GetParam {
             command: constant::GET_PARAM_STR,
             test: T::name(),
         })?;
         let rsp_struct: rsp::GetParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.param)
+    }
+
+    pub fn set_param<T>(&mut self, param: T) -> anyhow::Result<T>
+    where
+        T: param::TestParam + ser::Serialize + de::DeserializeOwned,
+    {
+        let cmd_json = serde_json::to_value(&cmd::SetParam {
+            command: constant::SET_PARAM_STR,
+            test: T::name(),
+            param: param,
+        })?;
+        let rsp_struct: rsp::SetParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.param)
     }
 
@@ -142,13 +157,12 @@ impl Rodeostat {
         Ok(rsp_string)
     }
 
-    pub fn write_json_read_rsp<T: de::DeserializeOwned>(
-        &mut self,
-        cmd_json: &JsonValue,
-    ) -> anyhow::Result<T> {
+    pub fn write_json_read_rsp<T>(&mut self, cmd_json: &JsonValue) -> anyhow::Result<T>
+    where
+        T: de::DeserializeOwned,
+    {
         let rsp_string = self.write_json_read_rsp_string(cmd_json)?;
         let rsp_struct: T = serde_json::from_str(&rsp_string)?;
         Ok(rsp_struct)
     }
 }
-

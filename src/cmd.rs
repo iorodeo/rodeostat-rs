@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-//use crate::constant;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct NoArgCmd<'a> {
@@ -22,4 +21,14 @@ pub struct SetAllElectConn<'a> {
 pub struct GetParam<'a> {
     pub command: &'a str,
     pub test: &'a str,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetParam<'a, T> 
+where
+    T: crate::param::TestParam + Serialize
+{
+    pub command: &'a str,
+    pub test: &'a str,
+    pub param: T,
 }

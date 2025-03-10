@@ -10,7 +10,7 @@ pub trait TestParam {
 #[serde(rename_all = "camelCase")]
 pub struct CyclicParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub amplitude: f32,
     pub offset: f32,
     pub shift: f32,
@@ -27,7 +27,7 @@ impl TestParam for CyclicParam {
 #[serde(rename_all = "camelCase")]
 pub struct SinusoidParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub amplitude: f32,
     pub offset: f32,
     pub shift: f32,
@@ -44,9 +44,9 @@ impl TestParam for SinusoidParam {
 #[serde(rename_all = "camelCase")]
 pub struct ConstantParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub value: f32,
-    pub duration: f32,
+    pub duration: u32,
 }
 impl TestParam for ConstantParam {
     fn name() -> &'static str {
@@ -58,7 +58,7 @@ impl TestParam for ConstantParam {
 #[serde(rename_all = "camelCase")]
 pub struct SquareWaveParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub start_value: f32,
     pub final_value: f32,
     pub step_value: f32,
@@ -75,7 +75,7 @@ impl TestParam for SquareWaveParam {
 #[serde(rename_all = "camelCase")]
 pub struct LinearSweepParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub start_value: f32,
     pub final_value: f32,
     pub duration: u32,
@@ -90,7 +90,7 @@ impl TestParam for LinearSweepParam {
 #[serde(rename_all = "camelCase")]
 pub struct ChronoampParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub step: [(u32, f32); 2],
 }
 impl TestParam for ChronoampParam {
@@ -103,7 +103,7 @@ impl TestParam for ChronoampParam {
 #[serde(rename_all = "camelCase")]
 pub struct MultistepParam {
     pub quiet_value: f32,
-    pub quiet_time: f32,
+    pub quiet_time: u32,
     pub step: Vec<(u32, f32)>,
 }
 impl TestParam for MultistepParam {
