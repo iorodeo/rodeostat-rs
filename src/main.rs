@@ -93,12 +93,17 @@ fn main() {
 
     let p : ConstantParam = ConstantParam {
         quiet_value: 0.5, 
-        quiet_time: 100,
+        quiet_time: 300,
         value: -3.0, 
         duration: 2000,
     };
     let q = dev.set_param(p)
         .expect("error unable to set parameters");
     println!("{q:?}");
+
+    let volt_range = dev.get_volt_range()
+        .expect("error unable to get volt_range");
+    println!("volt_range = {volt_range}");
+
 
 }

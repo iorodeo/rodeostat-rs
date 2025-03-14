@@ -105,6 +105,14 @@ impl Rodeostat {
         Ok(rsp_struct.response.param)
     }
 
+    pub fn get_volt_range(&mut self) -> anyhow::Result<String> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_VOLT_RANGE_STR,
+        })?;
+        let rsp_struct: rsp::GetVoltRange = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.volt_range)
+    }
+
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,
