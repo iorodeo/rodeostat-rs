@@ -12,6 +12,7 @@ pub struct ErrorMsg {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVariantRsp {
     pub command: String,
@@ -25,6 +26,7 @@ pub struct GetVariant {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTestNamesRsp {
@@ -39,6 +41,7 @@ pub struct GetTestNames {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVoltRsp {
     pub command: String,
@@ -52,6 +55,7 @@ pub struct GetVolt {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetVoltRsp {
     pub command: String,
@@ -65,6 +69,7 @@ pub struct SetVolt {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct GetCurrRsp {
@@ -79,6 +84,7 @@ pub struct GetCurr {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetRefVoltRsp {
     pub command: String,
@@ -92,6 +98,7 @@ pub struct GetRefVolt {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetParam<T> {
     pub command: String,
@@ -106,6 +113,7 @@ pub struct GetParamRsp<T> {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetParam<T> {
     pub command: String,
@@ -120,6 +128,7 @@ pub struct SetParamRsp<T> {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct GetVoltRangeRsp {
@@ -134,6 +143,22 @@ pub struct GetVoltRange {
 }
 
 
+// ----------------------------------------------
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct SetVoltRangeRsp {
+    pub command: String,
+    pub volt_range: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetVoltRange {
+    pub success: bool,
+    pub response: SetVoltRangeRsp,
+}
+
+
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionRsp {
     pub command: String,
@@ -147,6 +172,7 @@ pub struct GetVersion {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetAllElectConnRsp {
     pub command: String,
@@ -160,6 +186,7 @@ pub struct SetAllElectConn {
 }
 
 
+// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetAllElectConnRsp {
     pub command: String,

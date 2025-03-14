@@ -32,3 +32,10 @@ where
     pub test: &'a str,
     pub param: T,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct SetVoltRange<'a> {
+    pub command: &'a str, 
+    pub volt_range: &'a str, 
+}

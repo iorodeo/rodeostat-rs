@@ -105,5 +105,13 @@ fn main() {
         .expect("error unable to get volt_range");
     println!("volt_range = {volt_range}");
 
+    let volt_range = dev.set_volt_range("5V")
+        .expect("error unable to set volt_range");
+    println!("volt_range = {volt_range}");
+
+    let volt_range = dev.get_volt_range()
+        .expect("error unable to get volt_range");
+    println!("volt_range = {volt_range}");
+
 
 }
