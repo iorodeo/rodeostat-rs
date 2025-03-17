@@ -9,6 +9,7 @@ use rodeostat_rs::param::{
     SquareWaveParam,
 };
 
+
 fn main() {
 
     let mut dev = Rodeostat::new("/dev/ttyACM0")

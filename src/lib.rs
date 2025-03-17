@@ -125,9 +125,9 @@ impl Rodeostat {
     pub fn get_all_volt_range(&mut self) -> anyhow::Result<Vec<String>> {
         let hardware_variant = self.get_hardware_variant()?;
         if hardware_variant.contains("AD8251") {
-            Ok(str_array_to_vec(&constant::VOLT_RANGES_8V))
+            Ok(to_vec_string(&constant::VOLT_RANGES_8V))
         } else {
-            Ok(str_array_to_vec(&constant::VOLT_RANGES_10V))
+            Ok(to_vec_string(&constant::VOLT_RANGES_10V))
         }
     }
 
@@ -151,11 +151,11 @@ impl Rodeostat {
     pub fn get_all_curr_range(&mut self) -> anyhow::Result<Vec<String>> {
         let hardware_variant = self.get_hardware_variant()?;
         match hardware_variant {
-            val if val.contains("nano") => Ok(str_array_to_vec(&constant::CURR_RANGES_NANO)),
-            val if val.contains("micro") => Ok(str_array_to_vec(&constant::CURR_RANGES_MICRO)),
-            val if val.contains("milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_10)),
-            val if val.contains("10Milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_10)),
-            val if val.contains("24Milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_24)),
+            val if val.contains("nano") => Ok(to_vec_string(&constant::CURR_RANGES_NANO)),
+            val if val.contains("micro") => Ok(to_vec_string(&constant::CURR_RANGES_MICRO)),
+            val if val.contains("milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_10)),
+            val if val.contains("10Milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_10)),
+            val if val.contains("24Milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_24)),
             _ => Err(anyhow!("unknown hardware variant"))
         }
     }
@@ -222,7 +222,7 @@ impl Rodeostat {
     }
 }
 
-fn str_array_to_vec(str_array: &[&str]) -> Vec<String> {
+fn to_vec_string(str_array: &[&str]) -> Vec<String> {
     let string: Vec<String> = str_array.iter().map(|v| v.to_string()).collect();
     string
 }
