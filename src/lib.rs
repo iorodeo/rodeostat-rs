@@ -1,7 +1,7 @@
 mod cmd;
 mod constant;
-pub mod param;
 mod rsp;
+pub mod param;
 
 use anyhow::anyhow;
 use serde::{de, ser};
@@ -112,7 +112,7 @@ impl Rodeostat {
         let rsp_struct: rsp::GetVoltRange = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.volt_range)
     }
-
+    
     pub fn set_volt_range(&mut self, volt_range: &str) -> anyhow::Result<String> {
         let cmd_json = serde_json::to_value(&cmd::SetVoltRange {
             command: constant::SET_VOLT_RANGE_STR, 
@@ -120,6 +120,44 @@ impl Rodeostat {
         })?;
         let rsp_struct: rsp::SetVoltRange = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.volt_range)
+    }
+
+    pub fn get_all_volt_range(&mut self) -> anyhow::Result<Vec<String>> {
+        let hardware_variant = self.get_hardware_variant()?;
+        if hardware_variant.contains("AD8251") {
+            Ok(str_array_to_vec(&constant::VOLT_RANGES_8V))
+        } else {
+            Ok(str_array_to_vec(&constant::VOLT_RANGES_10V))
+        }
+    }
+
+    pub fn get_curr_range(&mut self) -> anyhow::Result<String> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_CURR_RANGE_STR,
+        })?;
+        let rsp_struct: rsp::GetCurrRange = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.curr_range)
+    }
+
+    pub fn set_curr_range(&mut self, curr_range: &str) -> anyhow::Result<String> {
+        let cmd_json = serde_json::to_value(&cmd::SetCurrRange {
+            command: constant::SET_CURR_RANGE_STR,
+            curr_range: curr_range,
+        })?;
+        let rsp_struct: rsp::SetCurrRange = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.curr_range)
+    }
+
+    pub fn get_all_curr_range(&mut self) -> anyhow::Result<Vec<String>> {
+        let hardware_variant = self.get_hardware_variant()?;
+        match hardware_variant {
+            val if val.contains("nano") => Ok(str_array_to_vec(&constant::CURR_RANGES_NANO)),
+            val if val.contains("micro") => Ok(str_array_to_vec(&constant::CURR_RANGES_MICRO)),
+            val if val.contains("milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_10)),
+            val if val.contains("10Milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_10)),
+            val if val.contains("24Milli") => Ok(str_array_to_vec(&constant::CURR_RANGES_MILLI_24)),
+            _ => Err(anyhow!("unknown hardware variant"))
+        }
     }
 
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
@@ -182,4 +220,9 @@ impl Rodeostat {
         let rsp_struct: T = serde_json::from_str(&rsp_string)?;
         Ok(rsp_struct)
     }
+}
+
+fn str_array_to_vec(str_array: &[&str]) -> Vec<String> {
+    let string: Vec<String> = str_array.iter().map(|v| v.to_string()).collect();
+    string
 }

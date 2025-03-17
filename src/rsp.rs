@@ -160,6 +160,36 @@ pub struct SetVoltRange {
 
 // ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct GetCurrRangeRsp {
+    pub command: String,
+    pub curr_range: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetCurrRange {
+    pub success: bool,
+    pub response: GetCurrRangeRsp,
+}
+
+
+// ----------------------------------------------
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct SetCurrRangeRsp {
+    pub command: String,
+    pub curr_range: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct SetCurrRange {
+    pub success: bool,
+    pub response: SetCurrRangeRsp,
+}
+
+
+// ----------------------------------------------
+#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionRsp {
     pub command: String,
     pub version: String,

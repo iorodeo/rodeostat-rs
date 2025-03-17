@@ -105,13 +105,39 @@ fn main() {
         .expect("error unable to get volt_range");
     println!("volt_range = {volt_range}");
 
-    let volt_range = dev.set_volt_range("5V")
+
+    let all_volt_ranges = dev.get_all_volt_range()
+        .expect("unable to get volt ranges");
+    println!("all_volt_ranges = {all_volt_ranges:?}");
+
+    println!("loop over volt ranges");
+    for volt_range in all_volt_ranges { 
+        let x = dev.set_volt_range(&volt_range)
+                .expect("error unable to set volt_range");
+        println!("volt_range = {x}");
+    }
+
+    let volt_range = dev.set_volt_range("1V")
         .expect("error unable to set volt_range");
     println!("volt_range = {volt_range}");
 
     let volt_range = dev.get_volt_range()
         .expect("error unable to get volt_range");
     println!("volt_range = {volt_range}");
+
+    let curr_range = dev.get_curr_range()
+        .expect("error unable to get current range");
+    println!("curr_range: {curr_range}");
+
+    let curr_range = dev.set_curr_range("100uA")
+        .expect("error unable to set current range");
+    println!("curr_range: {curr_range}");
+
+    let curr_range = dev.get_curr_range()
+        .expect("error unable to get current range");
+    println!("curr_range: {curr_range}");
+
+
 
 
 }
