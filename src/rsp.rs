@@ -190,6 +190,21 @@ pub struct SetCurrRange {
 
 // ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct GetDeviceIdRsp {
+    pub command: String,
+    pub device_id: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GetDeviceId {
+    pub success: bool,
+    pub response: GetDeviceIdRsp,
+}
+
+
+// ----------------------------------------------
+#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVersionRsp {
     pub command: String,
     pub version: String,

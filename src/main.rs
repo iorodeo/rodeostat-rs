@@ -138,6 +138,10 @@ fn main() {
         .expect("error unable to get current range");
     println!("curr_range: {curr_range}");
 
+    let device_id = dev.get_device_id()
+        .expect("error unable to get device id");
+    println!("device_id: {device_id}");
+
 
 
 

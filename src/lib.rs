@@ -161,6 +161,14 @@ impl Rodeostat {
         }
     }
 
+    pub fn get_device_id(&mut self) -> anyhow::Result<u32> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_DEVICE_ID_STR,
+        })?;
+        let rsp_struct: rsp::GetDeviceId = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.device_id)
+    }
+
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,
