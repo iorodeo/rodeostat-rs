@@ -1,9 +1,9 @@
 mod cmd;
 mod constant;
-mod rsp;
-mod ranges;
 pub mod param;
+mod rsp;
 
+use rsp::{Rsp, ParamRsp};
 use anyhow::anyhow;
 use serde::{de, ser};
 use serde_json::Value as JsonValue;
@@ -28,7 +28,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_VARIANT_STR,
         })?;
-        let rsp_struct: rsp::GetVariant = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetVariant> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.variant)
     }
 
@@ -36,7 +36,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_VERSION_STR,
         })?;
-        let rsp_struct: rsp::GetVersion = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetVersion> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.version)
     }
 
@@ -44,7 +44,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_TEST_NAMES_STR,
         })?;
-        let rsp_struct: rsp::GetTestNames = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetTestNames> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.test_names)
     }
 
@@ -52,7 +52,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_VOLT_STR,
         })?;
-        let rsp_struct: rsp::GetVolt = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetVolt> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.v)
     }
 
@@ -61,7 +61,7 @@ impl Rodeostat {
             command: constant::SET_VOLT_STR,
             v: volt,
         })?;
-        let rsp_struct: rsp::SetVolt = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::SetVolt> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.v)
     }
 
@@ -69,7 +69,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_CURR_STR,
         })?;
-        let rsp_struct: rsp::GetCurr = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetCurr> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.i)
     }
 
@@ -77,7 +77,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_REF_VOLT_STR,
         })?;
-        let rsp_struct: rsp::GetRefVolt = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetRefVolt> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.r)
     }
 
@@ -89,7 +89,7 @@ impl Rodeostat {
             command: constant::GET_PARAM_STR,
             test: T::name(),
         })?;
-        let rsp_struct: rsp::GetParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: ParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.param)
     }
 
@@ -102,7 +102,7 @@ impl Rodeostat {
             test: T::name(),
             param: param,
         })?;
-        let rsp_struct: rsp::SetParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: ParamRsp<T> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.param)
     }
 
@@ -110,16 +110,16 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_VOLT_RANGE_STR,
         })?;
-        let rsp_struct: rsp::GetVoltRange = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetVoltRange> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.volt_range)
     }
-    
+
     pub fn set_volt_range(&mut self, volt_range: &str) -> anyhow::Result<String> {
         let cmd_json = serde_json::to_value(&cmd::SetVoltRange {
-            command: constant::SET_VOLT_RANGE_STR, 
+            command: constant::SET_VOLT_RANGE_STR,
             volt_range: volt_range,
         })?;
-        let rsp_struct: rsp::SetVoltRange = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::SetVoltRange> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.volt_range)
     }
 
@@ -136,7 +136,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_CURR_RANGE_STR,
         })?;
-        let rsp_struct: rsp::GetCurrRange = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetCurrRange> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.curr_range)
     }
 
@@ -145,7 +145,7 @@ impl Rodeostat {
             command: constant::SET_CURR_RANGE_STR,
             curr_range: curr_range,
         })?;
-        let rsp_struct: rsp::SetCurrRange = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::SetCurrRange> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.curr_range)
     }
 
@@ -157,7 +157,7 @@ impl Rodeostat {
             val if val.contains("milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_10)),
             val if val.contains("10Milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_10)),
             val if val.contains("24Milli") => Ok(to_vec_string(&constant::CURR_RANGES_MILLI_24)),
-            _ => Err(anyhow!("unknown hardware variant"))
+            _ => Err(anyhow!("unknown hardware variant")),
         }
     }
 
@@ -165,7 +165,16 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_DEVICE_ID_STR,
         })?;
-        let rsp_struct: rsp::GetDeviceId = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetDeviceId> = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.device_id)
+    }
+
+    pub fn set_device_id(&mut self, device_id: u32) -> anyhow::Result<u32> {
+        let cmd_json = serde_json::to_value(&cmd::SetDeviceId {
+            command: constant::SET_DEVICE_ID_STR,
+            device_id: device_id,
+        })?;
+        let rsp_struct: Rsp<rsp::SetDeviceId> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.device_id)
     }
 
@@ -174,7 +183,7 @@ impl Rodeostat {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,
             connected: value,
         })?;
-        let rsp_struct: rsp::SetAllElectConn = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::SetAllElectConn> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.connected)
     }
 
@@ -182,7 +191,7 @@ impl Rodeostat {
         let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
             command: constant::GET_ALL_ELECT_CONNECTED_STR,
         })?;
-        let rsp_struct: rsp::GetAllElectConn = self.write_json_read_rsp(&cmd_json)?;
+        let rsp_struct: Rsp<rsp::GetAllElectConn> = self.write_json_read_rsp(&cmd_json)?;
         Ok(rsp_struct.response.connected)
     }
 

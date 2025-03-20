@@ -26,7 +26,7 @@ pub const SET_VOLT_RANGE_STR: &str = "setVoltRange";
 pub const GET_CURR_RANGE_STR: &str = "getCurrRange";
 pub const SET_CURR_RANGE_STR: &str = "setCurrRange";
 pub const GET_DEVICE_ID_STR: &str = "getDeviceId";
-//pub const SET_DEVICE_ID_STR: &str = "setDeviceId";
+pub const SET_DEVICE_ID_STR: &str = "setDeviceId";
 //pub const GET_SAMPLE_PERIOD_STR: &str = "getSamplePeriod";
 //pub const SET_SAMPLE_PERIOD_STR: &str = "setSamplePeriod";
 //pub const GET_TEST_DONE_TIME_STR: &str = "getTestDoneTime";
@@ -59,7 +59,6 @@ pub const GET_ALL_ELECT_CONNECTED_STR: &str = "getAllElectConnected";
 //pub const GET_REF_ELECT_VOLT_RANGE_STR: &str = "getRefElectVoltRange";
 //pub const GET_HARDWARE_VERSION_STR: &str = "getHardwareVersion";
 
-
 // Voltage Ranges
 pub const VOLT_RANGES_8V: [&str; 4] = ["1V", "2V", "4V", "8V"];
 pub const VOLT_RANGES_10V: [&str; 4] = ["1V", "2V", "5V", "10V"];
@@ -67,7 +66,7 @@ pub const VOLT_RANGES_10V: [&str; 4] = ["1V", "2V", "5V", "10V"];
 // Current Ranges
 pub const CURR_RANGES_NANO: [&str; 4] = ["1uA", "10uA", "100nA", "60nA"];
 pub const CURR_RANGES_MICRO: [&str; 4] = ["1uA", "10uA", "100uA", "1000uA"];
-pub const CURR_RANGES_MILLI_10: [&str; 4] = ["10uA", "100uA", "1000uA", "10000uA"]; 
+pub const CURR_RANGES_MILLI_10: [&str; 4] = ["10uA", "100uA", "1000uA", "10000uA"];
 pub const CURR_RANGES_MILLI_24: [&str; 4] = ["100uA", "1000uA", "12000uA", "24000uA"];
 
 //pub const COMMAND: &str = "command";

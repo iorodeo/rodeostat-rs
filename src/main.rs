@@ -142,6 +142,10 @@ fn main() {
         .expect("error unable to get device id");
     println!("device_id: {device_id}");
 
+    let device_id = dev.set_device_id(device_id+1)
+        .expect("error unable to set device id");
+    println!("device_id: {device_id}")
+
 
 
 

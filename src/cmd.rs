@@ -24,9 +24,9 @@ pub struct GetParam<'a> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SetParam<'a, T> 
+pub struct SetParam<'a, T>
 where
-    T: crate::param::TestParam + Serialize
+    T: crate::param::TestParam + Serialize,
 {
     pub command: &'a str,
     pub test: &'a str,
@@ -36,13 +36,20 @@ where
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVoltRange<'a> {
-    pub command: &'a str, 
-    pub volt_range: &'a str, 
+    pub command: &'a str,
+    pub volt_range: &'a str,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
 pub struct SetCurrRange<'a> {
-    pub command: &'a str, 
-    pub curr_range: &'a str, 
+    pub command: &'a str,
+    pub curr_range: &'a str,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct SetDeviceId<'a> {
+    pub command: &'a str,
+    pub device_id: u32,
 }

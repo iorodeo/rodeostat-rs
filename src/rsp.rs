@@ -5,100 +5,64 @@ pub struct Success {
     pub success: bool,
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct Rsp<T> {
+    pub success: bool,
+    pub response: T,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ParamRsp<T> {
+    pub success: bool,
+    pub response: SetParam<T>,
+}
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ErrorMsg {
     pub message: String,
 }
 
-
 // ----------------------------------------------
+
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariantRsp {
+pub struct GetVariant {
     pub command: String,
     pub variant: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariant {
-    pub success: bool,
-    pub response: GetVariantRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetTestNamesRsp {
+pub struct GetTestNames {
     pub command: String,
     pub test_names: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetTestNames {
-    pub success: bool,
-    pub response: GetTestNamesRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetVoltRsp {
-    pub command: String,
-    pub v: f32,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVolt {
-    pub success: bool,
-    pub response: GetVoltRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-pub struct SetVoltRsp {
     pub command: String,
     pub v: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SetVolt {
-    pub success: bool,
-    pub response: SetVoltRsp,
+    pub command: String,
+    pub v: f32,
 }
 
-
-// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetCurrRsp {
+pub struct GetCurr {
     pub command: String,
     pub i: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetCurr {
-    pub success: bool,
-    pub response: GetCurrRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetRefVoltRsp {
+pub struct GetRefVolt {
     pub command: String,
     pub r: f32,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetRefVolt {
-    pub success: bool,
-    pub response: GetRefVoltRsp,
-}
-
-
-// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetParam<T> {
     pub command: String,
@@ -107,14 +71,6 @@ pub struct GetParam<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetParamRsp<T> {
-    pub success: bool,
-    pub response: GetParam<T>,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
 pub struct SetParam<T> {
     pub command: String,
     pub test: String,
@@ -122,124 +78,62 @@ pub struct SetParam<T> {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SetParamRsp<T> {
-    pub success: bool,
-    pub response: SetParam<T>,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetVoltRangeRsp {
-    pub command: String,
-    pub volt_range: String,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct GetVoltRange {
-    pub success: bool,
-    pub response: GetVoltRangeRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct SetVoltRangeRsp {
     pub command: String,
     pub volt_range: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct SetVoltRange {
-    pub success: bool,
-    pub response: SetVoltRangeRsp,
+    pub command: String,
+    pub volt_range: String,
 }
 
-
-// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetCurrRangeRsp {
-    pub command: String,
-    pub curr_range: String,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct GetCurrRange {
-    pub success: bool,
-    pub response: GetCurrRangeRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct SetCurrRangeRsp {
     pub command: String,
     pub curr_range: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 pub struct SetCurrRange {
-    pub success: bool,
-    pub response: SetCurrRangeRsp,
+    pub command: String,
+    pub curr_range: String,
 }
 
-
-// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetDeviceIdRsp {
+pub struct GetDeviceId {
     pub command: String,
     pub device_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetDeviceId {
-    pub success: bool,
-    pub response: GetDeviceIdRsp,
+#[serde(rename_all = "camelCase")]
+pub struct SetDeviceId {
+    pub command: String,
+    pub device_id: u32,
 }
 
-
-// ----------------------------------------------
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVersionRsp {
+pub struct GetVersion {
     pub command: String,
     pub version: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVersion {
-    pub success: bool,
-    pub response: GetVersionRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-pub struct SetAllElectConnRsp {
-    pub command: String,
-    pub connected: bool,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
 pub struct SetAllElectConn {
-    success: bool,
-    pub response: SetAllElectConnRsp,
-}
-
-
-// ----------------------------------------------
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetAllElectConnRsp {
     pub command: String,
     pub connected: bool,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct GetAllElectConn {
-    success: bool,
-    pub response: GetAllElectConnRsp,
+    pub command: String,
+    pub connected: bool,
 }
+
