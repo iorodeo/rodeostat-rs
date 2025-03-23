@@ -53,3 +53,19 @@ pub struct SetDeviceId<'a> {
     pub command: &'a str,
     pub device_id: u32,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct SetSamplePeriod<'a> {
+    pub command: &'a str,
+    pub sample_period: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct GetTestDoneTime<'a> {
+    pub command: &'a str,
+    pub test: &'a str,
+}
+
+

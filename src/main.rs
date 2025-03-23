@@ -108,7 +108,7 @@ fn main() {
 
 
     let all_volt_ranges = dev.get_all_volt_range()
-        .expect("unable to get volt ranges");
+        .expect("error unable to get volt ranges");
     println!("all_volt_ranges = {all_volt_ranges:?}");
 
     println!("loop over volt ranges");
@@ -138,15 +138,63 @@ fn main() {
         .expect("error unable to get current range");
     println!("curr_range: {curr_range}");
 
+    let all_curr_ranges = dev.get_all_curr_range()
+        .expect("error unable to get all curr ranges");
+    println!("all_curr_ranges = {all_curr_ranges:?}");
+    for curr_range in all_curr_ranges {
+        let x = dev.set_curr_range(&curr_range)
+            .expect("error unable to set curr range");
+        println!("curr_range = {x}");
+    }
+    let curr_range = dev.set_curr_range("10uA")
+        .expect("error unable to set current range");
+    println!("curr_range: {curr_range}");
+
     let device_id = dev.get_device_id()
         .expect("error unable to get device id");
     println!("device_id: {device_id}");
-
-    let device_id = dev.set_device_id(device_id+1)
+    let device_id = if device_id == 0 {
+        1 
+    } else {
+        0
+    };
+    let device_id = dev.set_device_id(device_id)
         .expect("error unable to set device id");
-    println!("device_id: {device_id}")
+    println!("device_id: {device_id}");
 
+    let sample_period = dev.get_sample_period()
+        .expect("error unable to get sample period");
+    println!("sample_period: {sample_period}");
 
+    let sample_period = if sample_period == 5 {
+        10
+    } else {
+        5
+    };
+    let sample_period = dev.set_sample_period(sample_period)
+        .expect("error unable to set sample_period");
+    println!("sample_period: {sample_period}");
 
+    let sample_rate = dev.get_sample_rate()
+        .expect("error unable to get sample_rate");
+    println!("sample_rate: {sample_rate}");
+    let sample_rate = if sample_rate < 200.0f32 {
+        200.0f32 
+    } else {
+        100.0f32
+    };
+    let sample_rate = dev.set_sample_rate(sample_rate)
+        .expect("error unable to set sample rate");
+    println!("sample_rate: {sample_rate}");
+
+    let test_names = dev.get_test_names()
+        .expect("error gettting test names");
+
+    for name in test_names {
+        let test_done_time = dev.get_test_done_time(&name)
+            .expect("error unable to get test done time");
+        println!("test: {name}, test_done_time: {test_done_time}");
+    }
+        
 
 }

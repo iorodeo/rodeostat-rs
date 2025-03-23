@@ -15,7 +15,7 @@ pub struct Rsp<T> {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct ParamRsp<T> {
     pub success: bool,
-    pub response: SetParam<T>,
+    pub response: Param<T>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -23,55 +23,40 @@ pub struct ErrorMsg {
     pub message: String,
 }
 
-// ----------------------------------------------
-
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVariant {
+pub struct Variant {
     pub command: String,
     pub variant: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetTestNames {
+pub struct TestNames {
     pub command: String,
     pub test_names: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVolt {
-    pub command: String,
-    pub v: f32,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct SetVolt {
+pub struct Volt {
     pub command: String,
     pub v: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetCurr {
+pub struct Curr {
     pub command: String,
     pub i: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetRefVolt {
+pub struct RefVolt {
     pub command: String,
     pub r: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetParam<T> {
-    pub command: String,
-    pub test: String,
-    pub param: T,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct SetParam<T> {
+pub struct Param<T> {
     pub command: String,
     pub test: String,
     pub param: T,
@@ -79,60 +64,47 @@ pub struct SetParam<T> {
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct GetVoltRange {
+pub struct VoltRange {
     pub command: String,
     pub volt_range: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct SetVoltRange {
-    pub command: String,
-    pub volt_range: String,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct GetCurrRange {
+pub struct CurrRange {
     pub command: String,
     pub curr_range: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct SetCurrRange {
-    pub command: String,
-    pub curr_range: String,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all = "camelCase")]
-pub struct GetDeviceId {
+pub struct DeviceId {
     pub command: String,
     pub device_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
-pub struct SetDeviceId {
+pub struct SamplePeriod {
     pub command: String,
-    pub device_id: u32,
+    pub sample_period: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct GetVersion {
+#[serde(rename_all = "camelCase")]
+pub struct TestDoneTime {
+    pub command: String,
+    pub test_done_time: u32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Version {
     pub command: String,
     pub version: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct SetAllElectConn {
-    pub command: String,
-    pub connected: bool,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct GetAllElectConn {
+pub struct AllElectConn {
     pub command: String,
     pub connected: bool,
 }
