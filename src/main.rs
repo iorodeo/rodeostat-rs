@@ -195,6 +195,10 @@ fn main() {
             .expect("error unable to get test done time");
         println!("test: {name}, test_done_time: {test_done_time}");
     }
+
+    let hardware_version = dev.get_hardware_version()
+        .expect("error unable to get hardware version");
+    println!("hardware_version: {hardware_version}");
         
 
 }

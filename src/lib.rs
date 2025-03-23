@@ -238,6 +238,14 @@ impl Rodeostat {
         Ok(rsp_struct.response.version)
     }
 
+    pub fn get_hardware_version(&mut self) -> anyhow::Result<String> {
+        let cmd_json = serde_json::to_value(&cmd::NoArgCmd {
+            command: constant::GET_HARDWARE_VERSION_STR,
+        })?;
+        let rsp_struct: Rsp<rsp::Version> = self.write_json_read_rsp(&cmd_json)?;
+        Ok(rsp_struct.response.version)
+    }
+
     pub fn set_all_elect_connected(&mut self, value: bool) -> anyhow::Result<bool> {
         let cmd_json = serde_json::to_value(&cmd::SetAllElectConn {
             command: constant::SET_ALL_ELECT_CONNECTED_STR,

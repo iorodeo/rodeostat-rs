@@ -57,7 +57,7 @@ pub const GET_ALL_ELECT_CONNECTED_STR: &str = "getAllElectConnected";
 //pub const GET_ELECT_AUTO_CONNECT_STR: &str = "getElectAutoConnect";
 //pub const SET_REF_ELECT_VOLT_RANGE_STR: &str = "setRefElectVoltRange";
 //pub const GET_REF_ELECT_VOLT_RANGE_STR: &str = "getRefElectVoltRange";
-//pub const GET_HARDWARE_VERSION_STR: &str = "getHardwareVersion";
+pub const GET_HARDWARE_VERSION_STR: &str = "getHardwareVersion";
 
 // Voltage Ranges
 pub const VOLT_RANGES_8V: [&str; 4] = ["1V", "2V", "4V", "8V"];
